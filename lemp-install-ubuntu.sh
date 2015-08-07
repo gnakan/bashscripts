@@ -77,6 +77,8 @@ apt-get install -y phpmyadmin
 # Make PHPMyAdmin available as http://localhost/phpmyadmin
 ln -s /usr/share/phpmyadmin /usr/share/nginx/html/phpmyadmin
 
+echo
+echo
 #clear
 echo 'nginx installed:'
 nginx -v
@@ -93,4 +95,4 @@ apt-cache show mysql-server | grep Version
 echo
 echo
 
-echo "nginx, php, and mysql are now installed!"
+echo "YATA!"
