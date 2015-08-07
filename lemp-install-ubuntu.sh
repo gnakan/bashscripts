@@ -79,7 +79,7 @@ ln -s /usr/share/phpmyadmin /usr/share/nginx/html/phpmyadmin
 
 #clear
 echo 'nginx installed:'
-ngnix -v
+nginx -v
 echo
 echo
 
