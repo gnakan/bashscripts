@@ -79,12 +79,18 @@ ln -s /usr/share/phpmyadmin /usr/share/nginx/html/phpmyadmin
 
 #clear
 echo 'nginx installed:'
-echo ngnix -v
+ngnix -v
+echo
+echo
 
 echo 'php installed'
-echo php -v
+php -v
+echo
+echo
 
 echo 'mysql installed'
-echo  apt-cache show mysql-server | grep Version
+apt-cache show mysql-server | grep Version
+echo
+echo
 
 echo "nginx, php, and mysql are now installed!"
