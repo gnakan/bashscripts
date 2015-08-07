@@ -78,4 +78,13 @@ apt-get install -y phpmyadmin
 ln -s /usr/share/phpmyadmin /usr/share/nginx/html/phpmyadmin
 
 #clear
+echo 'nginx installed:'
+echo ngnix -v
+
+echo 'php installed'
+echo php -v
+
+echo 'mysql installed'
+echo  apt-cache show mysql-server | grep Version
+
 echo "nginx, php, and mysql are now installed!"
