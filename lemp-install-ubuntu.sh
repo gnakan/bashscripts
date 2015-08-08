@@ -42,17 +42,13 @@ echo -e 'server {
         index index.php index.html index.htm;
         server_name localhost;
 
-        location / {
-                try_files $uri $uri/ =404;
-        }
-
         location ~ \.php$ {
-                try_files $uri =404;
                 fastcgi_pass unix:/var/run/php5-fpm.sock;
                 fastcgi_index index.php;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                 include fastcgi_params;
-        }}' | sudo tee /etc/nginx/sites-available/default
+        }
+}' | sudo tee /etc/nginx/sites-available/default
 service nginx restart
 
 #install php and other related packages
