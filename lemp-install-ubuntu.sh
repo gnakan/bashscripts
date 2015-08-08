@@ -60,7 +60,6 @@ service nginx restart
 #install php and other related packages
 echo 'Installing php...'
 apt-get install -y php5-fpm
-service php5-fpm restart
 
 #configure php processor & restart
 echo 'Configuring php...'
