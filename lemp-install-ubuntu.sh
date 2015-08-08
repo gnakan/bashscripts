@@ -34,6 +34,27 @@ apt-get install -y upgrade
 echo 'Installing nginx...'
 apt-get install -y nginx
 
+#save the default nginx config then update it to handle php
+mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+echo 'server {
+        listen 80;
+        root /usr/share/nginx/html;
+        index index.php index.html index.htm;
+        server_name localhost;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+                try_files $uri =404;
+                fastcgi_pass unix:/var/run/php5-fpm.sock;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+        }
+	}' 
+> /etc/nginx/sites-available/default
 
 #configure php processor & restart
 echo 'Configuring php...'
@@ -41,7 +62,8 @@ sed -i s/\;cgi\.fix_pathinfo\s*\=\s*1/cgi.fix_pathinfo\=0/ /etc/php5/fpm/php.ini
 service php5-fpm restart
 
 #create the phpinfo page
-echo "<?php phpinfo(); ?>" > /usr/share/nginx/html/info.php
+echo "
+<?php phpinfo(); ?>" > /usr/share/nginx/html/info.php
 
 
 
@@ -61,8 +83,8 @@ mysql_install_db
 
 #install php and other related packages
 echo 'Installing php...'
-apt-get install -y php5-fpm php5-cli php5-pear php5-mysql
-
+apt-get install -y php5-fpm php5-mysql
+service php5-fpm restart
 
 # Install Composer
 echo 'Installing composer...'
