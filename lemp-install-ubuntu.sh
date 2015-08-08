@@ -36,7 +36,7 @@ apt-get install -y nginx
 
 #save the default nginx config then update it to handle php
 mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
-echo -e 'server {
+echo 'server {
         listen 80;
         root /usr/share/nginx/html;
         index index.php index.html index.htm;
