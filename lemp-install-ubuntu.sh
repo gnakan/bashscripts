@@ -17,6 +17,8 @@ echo
 echo "*****************************************************"
 echo "WARNING: DO NOT USE THIS FOR A PRODUCTION ENVIRONMENT"
 echo "USE AT YOUR OWN RISK"
+echo
+echo "PURPOSE: INSTALL LEMP ON UBUNTU OR DEBIAN"
 echo "*****************************************************"
 echo
 
@@ -32,15 +34,6 @@ apt-get install -y upgrade
 echo 'Installing nginx...'
 apt-get install -y nginx
 
-#install php
-echo 'Installing php...'
-apt-get install -y php5-fpm
-
-#install php cli
-apt-get install -y php5-cli
-
-#install php cli
-apt-get install -y php5-pear
 
 #configure php processor & restart
 echo 'Configuring php...'
@@ -56,18 +49,19 @@ echo "<?php phpinfo(); ?>" > /usr/share/nginx/html/info.php
 echo 'Installing mysql...'
 echo "mysql-server mysql-server/root_password password $DBPASSWD" | debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password $DBPASSWD" | debconf-set-selections
-apt-get install -y mysql-server-5.5
+apt-get install -y mysql-server
 # Setup db structure
 mysql_install_db
 # Secure Installation as defined via mysql_secure_installation
-mysql -uroot -p$DBPASSWD -e "DROP DATABASE test"
-mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.user WHERE User='root' AND NOT IN ('localhost', '127.0.0.1', '::1')"
-mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.user WHERE User=''"
-mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
-mysql -uroot -p$DBPASSWD -e "FLUSH PRIVILEGES"
+#mysql -uroot -p$DBPASSWD -e "DROP DATABASE test"
+#mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.user WHERE User='root' AND NOT IN ('localhost', '127.0.0.1', '::1')"
+#mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.user WHERE User=''"
+#mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
+#mysql -uroot -p$DBPASSWD -e "FLUSH PRIVILEGES"
 
-# Install php/myql stuff
-apt-get install -y php5-mysql
+#install php and other related packages
+echo 'Installing php...'
+apt-get install -y php5-fpm php5-cli php5-pear php5-mysql
 
 
 # Install Composer
@@ -88,9 +82,11 @@ apt-get install -y phpmyadmin
 # Make PHPMyAdmin available as http://localhost/phpmyadmin
 ln -s /usr/share/phpmyadmin /usr/share/nginx/html/phpmyadmin
 
-clear
 
-echo "********************************************************"
+echo
+echo "*****************************************************"
+echo "LEMP INSTALLATION COMPLETE"
+echo "*****************************************************"
 echo
 echo
 #clear
@@ -106,8 +102,7 @@ echo
 
 echo 'mysql installed with a root password of:'  $DBPASSWD 
 echo "Version info is:"
-apt-cache show mysql-server | grep Version
+mysql --version
 echo
 echo
-echo "********************************************************"
-echo "YATA!"
+echo "*****************************************************"
