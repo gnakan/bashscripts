@@ -55,6 +55,12 @@ echo 'server {
         }
 	}' 
 > /etc/nginx/sites-available/default
+service nginx restart
+
+#install php and other related packages
+echo 'Installing php...'
+apt-get install -y php5-fpm php5-mysql
+service php5-fpm restart
 
 #configure php processor & restart
 echo 'Configuring php...'
@@ -64,8 +70,6 @@ service php5-fpm restart
 #create the phpinfo page
 echo "
 <?php phpinfo(); ?>" > /usr/share/nginx/html/info.php
-
-
 
 # Install MySQL
 echo 'Installing mysql...'
@@ -81,16 +85,24 @@ mysql_install_db
 #mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
 #mysql -uroot -p$DBPASSWD -e "FLUSH PRIVILEGES"
 
-#install php and other related packages
-echo 'Installing php...'
-apt-get install -y php5-fpm php5-mysql
-service php5-fpm restart
+
 
 # Install Composer
 echo 'Installing composer...'
 curl -s https://getcomposer.org/installer | php
 # Make Composer available globally
 mv composer.phar /usr/local/bin/composer
+
+
+# Install PHPMyAdmin
+echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/app-password-confirm password $DBPASSWD" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password $DBPASSWD" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/app-pass password $DBPASSWD" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none" | debconf-set-selections
+apt-get install -y phpmyadmin
+# Make PHPMyAdmin available as http://localhost/phpmyadmin
+ln -s /usr/share/phpmyadmin /usr/share/nginx/html/phpmyadmin
 
 
 echo
