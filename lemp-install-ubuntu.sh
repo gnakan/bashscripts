@@ -93,18 +93,6 @@ curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
 
-# Install PHPMyAdmin
-echo "Installing PHPMyAdmin"
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password $DBPASSWD" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password $DBPASSWD" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/app-pass password $DBPASSWD" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none" | debconf-set-selections
-apt-get install -y phpmyadmin
-# Make PHPMyAdmin available as http://localhost/phpmyadmin
-ln -s /usr/share/phpmyadmin /usr/share/nginx/html/phpmyadmin
-
-
 echo
 echo "*****************************************************"
 echo "LEMP INSTALLATION COMPLETE"
