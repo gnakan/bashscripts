@@ -36,7 +36,7 @@ apt-get install -y nginx
 
 #save the default nginx config then update it to handle php
 mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
-echo 'server {
+echo -e 'server {
         listen 80;
         root /usr/share/nginx/html;
         index index.php index.html index.htm;
@@ -52,9 +52,7 @@ echo 'server {
                 fastcgi_index index.php;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                 include fastcgi_params;
-        }
-	}' 
-> /etc/nginx/sites-available/default
+        }}' | sudo tee /etc/nginx/sites-available/default
 service nginx restart
 
 #install php and other related packages
