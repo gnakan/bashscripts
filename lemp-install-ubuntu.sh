@@ -71,12 +71,7 @@ echo "mysql-server mysql-server/root_password_again password $DBPASSWD" | debcon
 apt-get install -y mysql-server
 # Setup db structure
 mysql_install_db
-# Secure Installation as defined via mysql_secure_installation
-#mysql -uroot -p$DBPASSWD -e "DROP DATABASE test"
-#mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.user WHERE User='root' AND NOT IN ('localhost', '127.0.0.1', '::1')"
-#mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.user WHERE User=''"
-#mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
-#mysql -uroot -p$DBPASSWD -e "FLUSH PRIVILEGES"
+
 
 # Command-Line Interpreter
 apt-get install -y php5-cli
