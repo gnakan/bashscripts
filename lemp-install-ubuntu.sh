@@ -1,13 +1,24 @@
 #!/usr/bin/env bash
 
+
+# check for root
+if [ `id -u` -ne '0' ]; then
+  echo "This script must be run as root" >&2
+  exit 1
+fi
+
+
 #variables
-DBHOST=localhost
-DBNAME=db1
-DBUSER=dbuser
-DBPASSWD=dbpassword
+DBPASSWD=root
 
 
 clear
+echo
+echo "*****************************************************"
+echo "WARNING: DO NOT USE THIS FOR A PRODUCTION ENVIRONMENT"
+echo "USE AT YOUR OWN RISK"
+echo "*****************************************************"
+echo
 
 #update the package lists
 echo 'Updating package lists...'
@@ -66,7 +77,7 @@ curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
 
-# Install PHPMyAdmin NOT ADVISABLE FOR PRODUCTION
+# Install PHPMyAdmin
 echo "Installing PHPMyAdmin"
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
 echo "phpmyadmin phpmyadmin/app-password-confirm password $DBPASSWD" | debconf-set-selections
@@ -77,22 +88,26 @@ apt-get install -y phpmyadmin
 # Make PHPMyAdmin available as http://localhost/phpmyadmin
 ln -s /usr/share/phpmyadmin /usr/share/nginx/html/phpmyadmin
 
+clear
+
+echo "********************************************************"
 echo
 echo
 #clear
-echo 'nginx installed:'
+echo 'nginx installed. Version info is:'
 nginx -v
 echo
 echo
 
-echo 'php installed'
+echo 'PHP installed. Version info is:'
 php -v
 echo
 echo
 
-echo 'mysql installed'
+echo 'mysql installed with a root password of:'  $DBPASSWD 
+echo "Version info is:"
 apt-cache show mysql-server | grep Version
 echo
 echo
-
+echo "********************************************************"
 echo "YATA!"
