@@ -59,7 +59,7 @@ service nginx restart
 
 #install php and other related packages
 echo 'Installing php...'
-apt-get install -y php5-fpm php5-mysql
+apt-get install -y php5-fpm
 service php5-fpm restart
 
 #configure php processor & restart
@@ -85,6 +85,11 @@ mysql_install_db
 #mysql -uroot -p$DBPASSWD -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
 #mysql -uroot -p$DBPASSWD -e "FLUSH PRIVILEGES"
 
+# Command-Line Interpreter
+apt-get install -y php5-cli
+
+# MySQL database connections directly from PHP
+apt-get install -y php5-mysql
 
 
 # Install Composer
