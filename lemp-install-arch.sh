@@ -97,6 +97,7 @@ http {
                     include /etc/nginx/fastcgi_params;
                     #include fastcgi.conf;
             }
+    }
 
 }' | sudo tee /etc/nginx/nginx.conf
 
