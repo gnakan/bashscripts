@@ -52,7 +52,7 @@ echo 'Installing nginx...'
 pacman -S nginx --noconfirm
 
 #save the default nginx config then update it to handle php
-mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
 echo 'server {
         listen 80;
         root /srv/http;
@@ -66,7 +66,7 @@ echo 'server {
                 include /etc/nginx/fastcgi_params;
                 #include fastcgi.conf;
         }
-}' | sudo tee /etc/nginx/sites-available/default
+}' | sudo tee /etc/nginx/nginx.conf
 
 systemctl start nginx
 
