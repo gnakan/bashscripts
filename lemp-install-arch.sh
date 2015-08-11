@@ -28,7 +28,8 @@ pacman -Syu
 
 
 # Install MySQL
-pacman -S mysql
+pacman -S mysql --noconfirm
+mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 systemctl start mysqld
 
 #set pw
@@ -63,12 +64,12 @@ systemctl start nginx
 
 #install php and other related packages
 echo 'Installing php...'
-pacman -S php-fpm
+pacman -S php-fpm --noconfirm
 
 #configure php processor & restart
-#echo 'Configuring php...'
-#sed -i s/\;cgi\.fix_pathinfo\s*\=\s*1/cgi.fix_pathinfo\=0/ /etc/php5/fpm/php.ini
-sudo systemctl start php-fpm
+echo 'Configuring php...'
+sed -i 's/;extension=mysql.so/extension=mysql\.so/g' /etc/php/php.ini
+systemctl start php-fpm
 
 #create the phpinfo page
 echo "
