@@ -113,8 +113,7 @@ systemctl start php-fpm
 systemctl enable php-fpm
 
 #create the phpinfo page
-echo "
-<?php phpinfo(); ?>" > /srv/http/info.php
+echo "<?php phpinfo(); ?>" > /srv/http/info.php
 
 systemctl restart nginx
 
