@@ -62,7 +62,7 @@ echo 'server {
         location ~ \.php$ {
                 fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
                 fastcgi_index index.php;
-                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                #fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                 #include fastcgi_params;
                 include fastcgi.conf;
         }
@@ -78,6 +78,7 @@ pacman -S php-fpm --noconfirm
 echo 'Configuring php...'
 sed -i 's/;extension=mysql.so/extension=mysql\.so/g' /etc/php/php.ini
 systemctl start php-fpm
+systemctl enable php-fpm
 
 #create the phpinfo page
 echo "
