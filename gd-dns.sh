@@ -10,10 +10,8 @@ fi
 cp /etc/resolv.conf /etc/resolv.conf.BAK
 
 
-echo '
-	nameserver	208.109.188.8
-	nameserver	208.109.188.8
-' | sudo tee /etc/resolv.conf
+echo 'nameserver	208.109.188.8 
+nameserver	208.109.188.8' | sudo tee /etc/resolv.conf
 
 
 echo 'Nameservers adjusted.'
