@@ -32,12 +32,17 @@ pacman -S mysql --noconfirm
 mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 systemctl start mysqld
 
-#set pw
-mysql_secure_installation
+#secure mysql
+
 
 #restart mysql
 #systemctl restart mysqld
-
+mysqladmin -u root password "$DBPASSWD"
+mysql -u root -p"$DBPASSWD" -e "UPDATE mysql.user SET Password=PASSWORD('$DBPASSWD') WHERE User='root'"
+mysql -u root -p"$DBPASSWD" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
+mysql -u root -p"$DBPASSWD" -e "DELETE FROM mysql.user WHERE User=''"
+mysql -u root -p"$DBPASSWD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
+mysql -u root -p"$DBPASSWD" -e "FLUSH PRIVILEGES"
 
 
 #install nginx
