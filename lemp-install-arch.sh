@@ -24,11 +24,11 @@ echo
 
 #update the package lists
 echo 'Updating...'
-sudo pacman -Syu
+pacman -Syu
 
 
 # Install MySQL
-pacman -S MySQL
+pacman -S mysql
 systemctl start mysqld
 
 #set pw

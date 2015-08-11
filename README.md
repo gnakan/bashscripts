@@ -9,3 +9,8 @@ Adjusts the dns, to adjust issues found with new Debian GD servers
 lemp-install-ubuntu
 Install using the following:
 <code>curl -s https://raw.githubusercontent.com/gnakan/bashscripts/master/lemp-install-ubuntu.sh | sudo sh</code>
+
+
+lemp-install-arch
+Install using the following:
+<code>curl -s https://raw.githubusercontent.com/gnakan/bashscripts/master/lemp-install-arch.sh | sudo sh</code>
