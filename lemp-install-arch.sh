@@ -36,7 +36,7 @@ systemctl start mysqld
 mysql_secure_installation
 
 #restart mysql
-systemctl restart mysqld
+#systemctl restart mysqld
 
 
 
