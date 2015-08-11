@@ -47,7 +47,7 @@ mysql -u root -p"$DBPASSWD" -e "FLUSH PRIVILEGES"
 
 #install nginx
 echo 'Installing nginx...'
-pacman install -S nginx
+pacman -S nginx
 
 #save the default nginx config then update it to handle php
 mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
