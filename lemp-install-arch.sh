@@ -62,9 +62,9 @@ echo 'server {
         location ~ \.php$ {
                 fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
                 fastcgi_index index.php;
-                #fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-                #include fastcgi_params;
-                include fastcgi.conf;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include /etc/nginx/fastcgi_params;
+                #include fastcgi.conf;
         }
 }' | sudo tee /etc/nginx/sites-available/default
 
