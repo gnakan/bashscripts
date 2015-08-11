@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # check for root
 if [ `id -u` -ne '0' ]; then
   echo "This script must be run as root" >&2
@@ -10,7 +9,6 @@ fi
 
 #variables
 DBPASSWD=root
-
 
 clear
 echo
@@ -26,7 +24,8 @@ echo
 echo 'Updating...'
 pacman -Syu
 
-
+echo 'Installing mysql...'
+#stop mysql just in case it was already installed
 systemctl stop mysqld
 
 # Install MySQL
@@ -51,6 +50,7 @@ mysql -u root -p"$DBPASSWD" -e "FLUSH PRIVILEGES"
 echo 'Installing nginx...'
 pacman -S nginx --noconfirm
 
+echo 'Configuring nginx'
 #save the default nginx config then update it to handle php
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
 echo '
