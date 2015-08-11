@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/env bash
 
 echo 'Adjusting nameservers...'
 # check for root
