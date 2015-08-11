@@ -27,6 +27,8 @@ echo 'Updating...'
 pacman -Syu
 
 
+systemctl stop mysqld
+
 # Install MySQL
 pacman -S mysql --noconfirm
 mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
