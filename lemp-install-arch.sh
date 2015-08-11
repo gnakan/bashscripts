@@ -101,6 +101,9 @@ http {
 
 }' | sudo tee /etc/nginx/nginx.conf
 
+#create the phpinfo page
+echo "<html><h2>No Denying The Hawaiian</h2></html>" > /srv/http/index.html
+
 systemctl start nginx
 
 #install php and other related packages
