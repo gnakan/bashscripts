@@ -101,7 +101,7 @@ http {
 }' | sudo tee /etc/nginx/nginx.conf
 
 #create the phpinfo page
-echo "<html><h2>No Denying The Hawaiian</h2><a href='info.php'>View PHP Info</a></html>" > /urs/share/nginx/html/index.html
+echo "<html><h2>No Denying The Hawaiian</h2><a href='info.php'>View PHP Info</a></html>" > /usr/share/nginx/html/index.html
 
 systemctl start nginx
 
@@ -111,11 +111,11 @@ yum -y install php-fpm php-mysql
 
 #configure php processor & restart
 echo 'Configuring php...'
-sed -i s/\;cgi\.fix_pathinfo\s*\=\s*1/cgi.fix_pathinfo\=0/ /etc/php5/fpm/php.ini
+sed -i s/\;cgi\.fix_pathinfo\s*\=\s*1/cgi.fix_pathinfo\=0/ /etc/php.ini
 service php-fpm restart
 
 #create the phpinfo page
-echo "<?php phpinfo(); ?>" > /srv/http/info.php
+echo "<?php phpinfo(); ?>" > /usr/share/nginx/html/info.php
 
 service nginx restart
 
