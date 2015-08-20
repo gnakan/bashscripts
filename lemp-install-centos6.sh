@@ -102,8 +102,7 @@ http {
 
 #create the phpinfo page
 echo "<html><h2>No Denying The Hawaiian</h2><a href='info.php'>View PHP Info</a></html>" > /usr/share/nginx/html/index.html
-
-systemctl start nginx
+service nginx restart
 
 #install php and other related packages
 echo 'Installing php...'
