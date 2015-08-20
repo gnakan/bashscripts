@@ -14,3 +14,7 @@ Install using the following:
 lemp-install-arch
 Install using the following:
 <code>curl -s https://raw.githubusercontent.com/gnakan/bashscripts/master/lemp-install-arch.sh | sudo sh</code>
+
+lemp-install-centos6
+Install using the following:
+<code>curl -s https://raw.githubusercontent.com/gnakan/bashscripts/master/lemp-install-centos6.sh | sudo sh</code>

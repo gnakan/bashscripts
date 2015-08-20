@@ -85,7 +85,7 @@ http {
 
     server {
             listen 80;
-            root /srv/http;
+            root /usr/share/nginx/html;
             index index.php index.html index.htm;
             server_name localhost;
 
@@ -101,7 +101,7 @@ http {
 }' | sudo tee /etc/nginx/nginx.conf
 
 #create the phpinfo page
-echo "<html><h2>No Denying The Hawaiian</h2><a href='info.php'>View PHP Info</a></html>" > /srv/http/index.html
+echo "<html><h2>No Denying The Hawaiian</h2><a href='info.php'>View PHP Info</a></html>" > /urs/share/nginx/html/index.html
 
 systemctl start nginx
 
@@ -134,7 +134,7 @@ echo
 echo
 
 echo 'PHP installed. Version info is:'
-php -v
+php-fpm -v
 echo
 echo
 
