@@ -32,6 +32,7 @@ apt-get install -y upgrade
 
 #install nginx
 echo 'Installing nginx...'
+mkdir /usr/share/nginx/html
 apt-get install -y nginx
 
 #save the default nginx config then update it to handle php
@@ -62,7 +63,7 @@ service php5-fpm restart
 
 #create the phpinfo page
 echo "
-<?php phpinfo(); ?>" > /usr/share/nginx/html/info.php
+<?php phpinfo(); ?>" > /usr/share/nginx/html/index.php
 
 # Install MySQL
 echo 'Installing mysql...'
