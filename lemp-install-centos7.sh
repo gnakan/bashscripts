@@ -26,12 +26,12 @@ yum -y install epel-release
 
 echo 'Installing mysql...'
 #stop mysql just in case it was already installed
-systemctl stop mysqld
+systemctl stop mariadb.service
 
 # Install MySQL
-yum -y install mysql-server
+yum -y install mariadb-server mariadb
 mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-systemctl start mysqld
+systemctl start mariadb.service
 
 #secure mysql
 
